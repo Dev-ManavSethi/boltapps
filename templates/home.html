@@ -1,0 +1,109 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bolt apps: Faster than Usain Bolt</title>
+
+    <link rel="stylesheet" type="text/css" href="/storage/css/style.css"/>
+</head>
+
+<body>
+
+      <div id="home-1-div" style="color: black;">      
+    <h1 id="time-taken"></h1>
+    <h2 id="refresh-hint"><i></i></h2>
+    <br/><br/>
+    <h3 id="avg-time-taken"></h3>
+    </div>
+
+  
+    <div id="home-2-div">
+  
+    </div>
+    
+        <script type="text/javascript">
+         var h =document.getElementById('time-taken');
+      
+           window.onload = function () {
+                var loadTime = window.performance.timing.domContentLoadedEventEnd-window.performance.timing.navigationStart;
+                h.innerHTML= "This website took just " + loadTime/1000 + " seconds to load!";
+            
+                document.getElementById('refresh-hint').innerHTML= "Takes upto 5x less time on next visits. (Hit refresh to see)";
+            
+                var avgh = document.getElementById("avg-time-taken");
+                
+                var c = readCookie("alt");
+                if(c.localeCompare("")==0){
+                  document.cookie = "alt=" + loadTime/1000;
+                 avgh.innerHTML= "Average Load Time (ALT): " +loadTime/1000 + " seconds.";
+                } else{
+                    c = c + "," + loadTime/1000;
+                  var sum = 0;
+                  var counter = 0;
+                  var times = c.split(",");
+                  
+                  for(var i=0; i<times.length; i++){
+                     sum= sum + parseFloat(times[i]);
+                     counter++;
+                  }
+                   var avg = sum/counter;
+                 avgh.innerHTML= "Average Load Time (ALT): " +avg + " seconds.";
+                 document.cookie = "alt=" + c;
+
+                 var div2 = document.getElementById('home-2-div');
+                 
+                 img = document.createElement('img');
+                 img.src = "/storage/img/girl.jpg";
+                 img.height = "300";
+                 img.classList.add('lazyload');
+                 div2.appendChild(img);
+
+                 img = document.createElement('img');
+                 img.src = "/storage/img/girl.jpg";
+                 img.height = "300";
+                 img.classList.add('lazyload');
+                 div2.appendChild(img);
+                 
+                 img = document.createElement('img');
+                 img.src = "/storage/img/girl.jpg";
+                 img.height = "300";
+                 img.classList.add('lazyload');
+                 div2.appendChild(img);
+                 
+    }
+
+    
+}
+   
+      
+
+   
+            
+          
+        
+        </script>
+
+     <script src="/storage/js/lazyload.js"></script>
+      <script>
+      lazyload();
+      </script>
+      
+        <script>
+            function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') {
+                    c = c.substring(1,c.length);
+                }
+                if (c.indexOf(nameEQ) == 0) {
+                    return c.substring(nameEQ.length,c.length);
+                }
+            }
+            return "";
+        }
+        </script>
+
+    </body>
+</html>
